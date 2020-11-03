@@ -1,0 +1,159 @@
+<html>
+<head>
+       <title></title>
+
+       <script type='text/javascript' src='jquery.js'></script>
+       <script type='text/javascript' src='bootstrap-4.5.3-dist/js/bootstrap.js'></script>
+       <script type='text/javascript' src='bootstrap-4.5.3-dist/js/bootstrap.bundle.js'></script>
+
+       <link rel='stylesheet' type='text/css' href='bootstrap-4.5.3-dist/css/bootstrap-grid.css'/>
+       <link rel='stylesheet' type='text/css' href='bootstrap-4.5.3-dist/css/bootstrap-reboot.css'/>
+       <link rel='stylesheet' type='text/css' href='bootstrap-4.5.3-dist/css/bootstrap.css'/>
+<style>
+
+.modalContainer #registros{
+    width: 90%;
+    height: auto;
+	height: 5rem;
+    border: 1px solid #58abb7;
+}
+.modalContainer #registro{
+    width: 30%;
+	height: 30px;
+    border: 1px solid #000000;
+    float: left;
+}
+.modalContainer pre{
+            width: 100%;
+			height: 5rem;
+        }
+
+    .modalContainer {
+			display: none; 
+			position: fixed; 
+			z-index: 1;
+			padding-top: 100px;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%; 
+			overflow: auto; 
+			background-color: rgb(0,0,0);
+			background-color: rgba(0,0,0,0.4);
+		}
+
+		.modalContainer .modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid lightgray;
+			border-top: 10px solid #58abb7;
+			width: 80%;
+		}
+
+		.modalContainer .close {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.modalContainer .close:hover,
+		.modalContainer .close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+        
+</style>
+    </head>
+<body>
+
+
+    <button id="btnModal">Abrir modal</button>
+	<div id="tvesModal" class="modalContainer">
+		<div class="modal-content">
+			<span class="close">×</span>
+            <input type="file" id="file-input" />
+            <h3>Contenido del archivo:</h3>
+            <pre id="contenido-archivo"></pre>
+            <label><input type="checkbox" id="cbox1" value="multiples">Multiples registros</label><br>   
+            
+            <div id="registros">
+                 
+            </div>
+ 
+        </div>
+	</div>
+
+
+    
+
+
+    <script>
+
+
+if(document.getElementById("btnModal")){
+			var modal = document.getElementById("tvesModal");
+			var btn = document.getElementById("btnModal");
+			var span = document.getElementsByClassName("close")[0];
+			var body = document.getElementsByTagName("body")[0];
+
+			btn.onclick = function() {
+				modal.style.display = "block";
+
+				body.style.position = "static";
+				body.style.height = "100%";
+				body.style.overflow = "hidden";
+			}
+
+			span.onclick = function() {
+				modal.style.display = "none";
+
+				body.style.position = "inherit";
+				body.style.height = "auto";
+				body.style.overflow = "visible";
+			}
+
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+
+					body.style.position = "inherit";
+					body.style.height = "auto";
+					body.style.overflow = "visible";
+				}
+			}
+		}
+
+
+
+
+        function leerArchivo(e) {
+          var archivo = e.target.files[0];
+          if (!archivo) {
+            return;
+          }
+          var lector = new FileReader();
+          lector.onload = function(e) {
+            var contenido = e.target.result;
+            mostrarContenido(contenido);
+          };
+          lector.readAsText(archivo);
+        }
+        
+        function mostrarContenido(contenido) {
+          var elemento = document.getElementById('contenido-archivo');
+          elemento.innerHTML = contenido;
+        }
+        
+        document.getElementById('file-input')
+          .addEventListener('change', leerArchivo, false);
+        
+        </script>
+
+</body>
+        
+
+</html>

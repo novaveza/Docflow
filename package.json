@@ -1,0 +1,14 @@
+{
+  "name": "nueva-carpeta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jquery.js",
+  "scripts": {
+    "start" : "electron main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^10.1.5"
+  }
+}
